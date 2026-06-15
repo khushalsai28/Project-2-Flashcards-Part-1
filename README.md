@@ -33,11 +33,16 @@ The following **additional** features are implemented:
 - [x] Responsive layout for smaller screens
 - [x] Styled flip-card look and hover interaction
 
-## Video Walkthrough
+## Running locally
 
-Here's a walkthrough of implemented required features:
+Install dependencies and start the dev server:
 
-GIF created with ...
+```
+npm install
+npm run dev
+```
+
+Open http://localhost:5173 in your browser.
 
 ## Notes
 
