@@ -8,7 +8,12 @@ const flashcardSet = {
     { question: 'Brazil', answer: 'Brasília', category: 'Geography' },
     { question: 'Australia', answer: 'Canberra', category: 'Geography' },
     { question: 'Canada', answer: 'Ottawa', category: 'Geography' },
-    { question: 'Egypt', answer: 'Cairo', category: 'Geography' }
+    { question: 'Egypt', answer: 'Cairo', category: 'Geography' },
+    { question: 'France', answer: 'Paris', category: 'Geography' },
+    { question: 'India', answer: 'New Delhi', category: 'Geography' },
+    { question: 'Mexico', answer: 'Mexico City', category: 'Geography' },
+    { question: 'Spain', answer: 'Madrid', category: 'Geography' },
+    { question: 'South Africa', answer: 'Pretoria', category: 'Geography' }
   ]
 };
 
