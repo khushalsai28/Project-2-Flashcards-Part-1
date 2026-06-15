@@ -1,0 +1,125 @@
+:root {
+  color-scheme: dark;
+  font-family: Inter, system-ui, sans-serif;
+  background: #0f172a;
+  color: #e2e8f0;
+}
+
+body {
+  margin: 0;
+  background: linear-gradient(180deg, #020617 0%, #111827 100%);
+}
+
+.app-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 1rem 3rem;
+}
+
+.app-header {
+  max-width: 800px;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.app-header h1 {
+  margin: 0;
+  font-size: clamp(2rem, 4vw, 3rem);
+}
+
+.app-header p {
+  margin: 0.75rem auto;
+  max-width: 640px;
+  color: #cbd5e1;
+}
+
+.card-count {
+  margin-top: 1rem;
+  font-weight: 600;
+  color: #f8fafc;
+}
+
+.flashcard-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 480px;
+}
+
+.flashcard {
+  width: 100%;
+  min-height: 260px;
+  border: 3px solid #6366f1;
+  border-radius: 24px;
+  background: radial-gradient(circle at top, rgba(96, 165, 250, 0.15), transparent 40%),
+    rgba(15, 23, 42, 0.95);
+  box-shadow: 0 18px 50px rgba(15, 23, 42, 0.35);
+  cursor: pointer;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flashcard:hover {
+  transform: translateY(-3px);
+}
+
+.flashcard-body {
+  padding: 1.75rem;
+  text-align: center;
+}
+
+.card-side-label {
+  margin: 0;
+  color: #94a3b8;
+  font-size: 0.95rem;
+}
+
+.flashcard h2 {
+  margin: 1.25rem 0 0.75rem;
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  line-height: 1.1;
+}
+
+.card-category {
+  display: inline-flex;
+  padding: 0.5rem 0.85rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #e2e8f0;
+  font-size: 0.95rem;
+}
+
+.next-button {
+  padding: 0.95rem 1.25rem;
+  border: none;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #6366f1, #2563eb);
+  color: white;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+}
+
+.next-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(56, 189, 248, 0.25);
+}
+
+.app-footer {
+  margin-top: 1.5rem;
+  color: #94a3b8;
+}
+
+@media (max-width: 520px) {
+  .flashcard {
+    min-height: 220px;
+  }
+}
