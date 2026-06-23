@@ -25,12 +25,13 @@ const categoryStyles = {
 
 function App() {
   // Ordered navigation: start at the first card
+  const [cards, setCards] = useState(() => flashcardSet.cards.slice());
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isFlipped, setIsFlipped] = useState(false);
   const [guess, setGuess] = useState('');
   const [feedback, setFeedback] = useState(null); // 'correct' | 'incorrect' | null
 
-  const currentCard = flashcardSet.cards[currentIndex];
+  const currentCard = cards[currentIndex];
 
   const normalize = (s) => s.replace(/[\W_]+/g, '').toLowerCase().trim();
 
@@ -48,7 +49,7 @@ function App() {
   };
 
   const goNext = () => {
-    if (currentIndex < flashcardSet.cards.length - 1) {
+    if (currentIndex < cards.length - 1) {
       setCurrentIndex((i) => i + 1);
       setIsFlipped(false);
       setGuess('');
@@ -63,6 +64,19 @@ function App() {
       setGuess('');
       setFeedback(null);
     }
+  };
+
+  const shuffleCards = () => {
+    const shuffled = cards.slice();
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    setCards(shuffled);
+    setCurrentIndex(0);
+    setIsFlipped(false);
+    setGuess('');
+    setFeedback(null);
   };
 
   return (
@@ -107,13 +121,17 @@ function App() {
         )}
 
         <div className="nav-row">
-          <button className="nav-button" onClick={goPrev} disabled={currentIndex === 0}>
-            ← Previous
-          </button>
-          <div className="card-position">Card {currentIndex + 1} of {flashcardSet.cards.length}</div>
-          <button className="nav-button" onClick={goNext} disabled={currentIndex === flashcardSet.cards.length - 1}>
-            Next →
-          </button>
+          <div className="nav-left">
+            <button className="nav-icon" onClick={goPrev} disabled={currentIndex === 0} aria-label="Previous card">←</button>
+          </div>
+
+          <div className="nav-center">
+            <button className="shuffle-button" onClick={shuffleCards} aria-label="Shuffle cards">Shuffle Cards</button>
+          </div>
+
+          <div className="nav-right">
+            <button className="nav-icon" onClick={goNext} disabled={currentIndex === cards.length - 1} aria-label="Next card">→</button>
+          </div>
         </div>
       </section>
 
