@@ -118,6 +118,66 @@ body {
   color: #94a3b8;
 }
 
+/* New styles for Part 3 features */
+.guess-form {
+  display: flex;
+  gap: 0.75rem;
+  width: 100%;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.guess-input {
+  flex: 1 1 60%;
+  padding: 0.75rem 1rem;
+  border-radius: 999px;
+  border: 1px solid rgba(148,163,184,0.12);
+  background: rgba(255,255,255,0.02);
+  color: #e2e8f0;
+}
+
+.submit-button {
+  padding: 0.7rem 1rem;
+  border-radius: 999px;
+  border: none;
+  background: linear-gradient(135deg,#10b981,#059669);
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.feedback { 
+  margin-top: 0.6rem;
+  font-weight: 700;
+}
+.feedback.correct { color: #10b981; }
+.feedback.incorrect { color: #ef4444; }
+
+.nav-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.nav-button {
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.04);
+  background: rgba(255,255,255,0.03);
+  color: #e2e8f0;
+  cursor: pointer;
+}
+.nav-button[disabled] {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.flashcard.correct { border-color: #10b981 !important; }
+.flashcard.incorrect { border-color: #ef4444 !important; }
+
 @media (max-width: 520px) {
   .flashcard {
     min-height: 220px;

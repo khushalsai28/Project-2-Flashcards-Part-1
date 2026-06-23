@@ -24,18 +24,45 @@ const categoryStyles = {
 };
 
 function App() {
-  const [currentIndex, setCurrentIndex] = useState(() => Math.floor(Math.random() * flashcardSet.cards.length));
+  // Ordered navigation: start at the first card
+  const [currentIndex, setCurrentIndex] = useState(0);
   const [isFlipped, setIsFlipped] = useState(false);
+  const [guess, setGuess] = useState('');
+  const [feedback, setFeedback] = useState(null); // 'correct' | 'incorrect' | null
 
   const currentCard = flashcardSet.cards[currentIndex];
 
-  const showNextCard = () => {
-    let nextIndex = currentIndex;
-    while (nextIndex === currentIndex && flashcardSet.cards.length > 1) {
-      nextIndex = Math.floor(Math.random() * flashcardSet.cards.length);
+  const normalize = (s) => s.replace(/[\W_]+/g, '').toLowerCase().trim();
+
+  const submitGuess = (e) => {
+    e && e.preventDefault();
+    if (!guess) return;
+    const user = normalize(guess);
+    const answer = normalize(currentCard.answer);
+    if (user === answer) {
+      setFeedback('correct');
+      setIsFlipped(true);
+    } else {
+      setFeedback('incorrect');
     }
-    setCurrentIndex(nextIndex);
-    setIsFlipped(false);
+  };
+
+  const goNext = () => {
+    if (currentIndex < flashcardSet.cards.length - 1) {
+      setCurrentIndex((i) => i + 1);
+      setIsFlipped(false);
+      setGuess('');
+      setFeedback(null);
+    }
+  };
+
+  const goPrev = () => {
+    if (currentIndex > 0) {
+      setCurrentIndex((i) => i - 1);
+      setIsFlipped(false);
+      setGuess('');
+      setFeedback(null);
+    }
   };
 
   return (
@@ -48,7 +75,7 @@ function App() {
 
       <section className="flashcard-area">
         <div
-          className={`flashcard ${isFlipped ? 'flipped' : ''}`}
+          className={`flashcard ${isFlipped ? 'flipped' : ''} ${feedback === 'correct' ? 'correct' : feedback === 'incorrect' ? 'incorrect' : ''}`}
           style={{ borderColor: categoryStyles[currentCard.category] || '#6366f1' }}
           onClick={() => setIsFlipped((prev) => !prev)}
         >
@@ -58,9 +85,36 @@ function App() {
             <span className="card-category">{currentCard.category}</span>
           </div>
         </div>
-        <button className="next-button" onClick={showNextCard}>
-          Show Random Card
-        </button>
+
+        <form className="guess-form" onSubmit={submitGuess}>
+          <input
+            className="guess-input"
+            aria-label="Enter your guess"
+            placeholder="Type your guess here"
+            value={guess}
+            onChange={(e) => setGuess(e.target.value)}
+            disabled={isFlipped}
+          />
+          <button className="submit-button" onClick={submitGuess} disabled={isFlipped}>
+            Submit Answer
+          </button>
+        </form>
+
+        {feedback && (
+          <div className={`feedback ${feedback}`} role="status">
+            {feedback === 'correct' ? 'Correct!' : 'Try again.'}
+          </div>
+        )}
+
+        <div className="nav-row">
+          <button className="nav-button" onClick={goPrev} disabled={currentIndex === 0}>
+            ← Previous
+          </button>
+          <div className="card-position">Card {currentIndex + 1} of {flashcardSet.cards.length}</div>
+          <button className="nav-button" onClick={goNext} disabled={currentIndex === flashcardSet.cards.length - 1}>
+            Next →
+          </button>
+        </div>
       </section>
 
       <footer className="app-footer">
